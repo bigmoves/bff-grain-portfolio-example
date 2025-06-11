@@ -80,30 +80,10 @@ grain-portfolio/
 
 ## Customization
 
-To display your own galleries, you need to modify two places in `main.tsx`:
-
-1. Update the DID in the `backfillCollections` function:
+To display your own galleries, you need to modify the REPO const in `main.tsx`:
 
 ```typescript
-await backfillCollections(
-  indexService,
-  cfg,
-)({
-  repos: ["your-did-here"],
-  collections: cfg.collections,
-});
-```
-
-2. Modify the DID in the root route handler:
-
-```typescript
-route("/", (_req, _params, ctx) => {
-  const galleries = getActorGalleries(
-    "your-did-here",
-    ctx
-  );
-  // ...
-}),
+const REPO = "your-did-here";
 ```
 
 ## Technologies

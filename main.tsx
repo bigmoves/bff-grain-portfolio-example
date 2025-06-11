@@ -1,3 +1,4 @@
+import { lexicons } from "$lexicon/lexicons.ts";
 import { Label } from "$lexicon/types/com/atproto/label/defs.ts";
 import { ProfileView } from "$lexicon/types/social/grain/actor/defs.ts";
 import { Record as Profile } from "$lexicon/types/social/grain/actor/profile.ts";
@@ -27,8 +28,11 @@ import { AtUri } from "npm:@atproto/syntax@0.4";
 
 let staticFilesHash = new Map<string, string>();
 
+const REPO = "did:plc:bcgltzqazw5tb6k2g3ttenbj";
+
 bff({
   appName: "Grain Social Portfolio",
+  databaseUrl: "sqlite.db",
   // Collections marked as external are only indexed for known actors in the
   // system, in this case the did of the repo you specify below.
   externalCollections: [
@@ -38,13 +42,19 @@ bff({
     "social.grain.photo",
   ],
   jetstreamUrl: JETSTREAM.WEST_1,
+  lexicons,
   onListen: async ({ indexService, cfg }) => {
     staticFilesHash = await generateStaticFilesHash();
+    const actor = indexService.getActor(REPO);
+    if (actor) {
+      // If the actor exists, we assume the database is already initialized
+      return;
+    }
     await backfillCollections(
       indexService,
       cfg,
     )({
-      repos: ["did:plc:bcgltzqazw5tb6k2g3ttenbj"],
+      repos: [REPO],
       externalCollections: cfg.externalCollections,
     });
   },
@@ -52,7 +62,7 @@ bff({
   middlewares: [
     route("/", (_req, _params, ctx) => {
       const galleries = getActorGalleries(
-        "did:plc:bcgltzqazw5tb6k2g3ttenbj",
+        REPO,
         ctx,
       );
       return ctx.render(

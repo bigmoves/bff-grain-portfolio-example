@@ -2,7 +2,7 @@
   "version": "5",
   "specifiers": {
     "jsr:@bigmoves/atproto-oauth-client@0.2": "0.2.0",
-    "jsr:@bigmoves/bff@0.3.0-beta.33": "0.3.0-beta.33",
+    "jsr:@bigmoves/bff@0.3.0-beta.34": "0.3.0-beta.34",
     "jsr:@std/assert@^1.0.13": "1.0.13",
     "jsr:@std/cache@0.2": "0.2.0",
     "jsr:@std/cli@^1.0.18": "1.0.19",
@@ -18,7 +18,7 @@
     "jsr:@std/streams@^1.0.9": "1.0.9",
     "npm:@atproto-labs/handle-resolver-node@~0.1.14": "0.1.16",
     "npm:@atproto-labs/simple-store@~0.1.2": "0.1.2",
-    "npm:@atproto/api@~0.15.7": "0.15.12",
+    "npm:@atproto/api@~0.15.7": "0.15.14",
     "npm:@atproto/common@~0.4.10": "0.4.11",
     "npm:@atproto/identity@~0.4.7": "0.4.8",
     "npm:@atproto/jwk@0.1.4": "0.1.4",
@@ -26,7 +26,7 @@
     "npm:@atproto/lexicon@*": "0.4.11",
     "npm:@atproto/lexicon@0.4.11": "0.4.11",
     "npm:@atproto/lexicon@~0.4.11": "0.4.11",
-    "npm:@atproto/oauth-client@~0.3.13": "0.3.20",
+    "npm:@atproto/oauth-client@~0.3.13": "0.3.21",
     "npm:@atproto/oauth-types@~0.2.4": "0.2.8",
     "npm:@atproto/syntax@0.4": "0.4.0",
     "npm:@atproto/xrpc-server@*": "0.7.18",
@@ -36,11 +36,11 @@
     "npm:@types/node@*": "22.15.15",
     "npm:clsx@^2.1.1": "2.1.1",
     "npm:jose@5.9.6": "5.9.6",
-    "npm:multiformats@*": "13.3.6",
-    "npm:multiformats@^13.3.2": "13.3.6",
+    "npm:multiformats@*": "13.3.7",
+    "npm:multiformats@^13.3.2": "13.3.7",
     "npm:preact-render-to-string@^6.5.13": "6.5.13_preact@10.26.8",
     "npm:preact@^10.26.5": "10.26.8",
-    "npm:tailwind-merge@^3.2.0": "3.3.0",
+    "npm:tailwind-merge@^3.2.0": "3.3.1",
     "npm:tailwindcss@^4.1.9": "4.1.9",
     "npm:typed-htmx@~0.3.1": "0.3.1"
   },
@@ -56,8 +56,8 @@
         "npm:jose"
       ]
     },
-    "@bigmoves/bff@0.3.0-beta.33": {
-      "integrity": "6e1f7ca871be05270e45742a7a6576dc1bf3247de7fa1ec966a30a93d2a79556",
+    "@bigmoves/bff@0.3.0-beta.34": {
+      "integrity": "dec3967a4f78991f1791e15a95ed09f97365809675a7fe281114fef8470415d1",
       "dependencies": [
         "jsr:@bigmoves/atproto-oauth-client",
         "jsr:@std/assert",
@@ -205,8 +205,8 @@
     "@atproto-labs/simple-store@0.2.0": {
       "integrity": "sha512-0bRbAlI8Ayh03wRwncAMEAyUKtZ+AuTS1jgPrfym1WVOAOiottI/ZmgccqLl6w5MbxVcClNQF7WYGKvGwGoIhA=="
     },
-    "@atproto/api@0.15.12": {
-      "integrity": "sha512-51IHenZMA+Ekfe2OlZL/mTFqvZQU93jI4xsLvTFhGc4tSQYCHV9r/AJTANPZLFrhm9GfWZ0n90r/9IQl9eicjg==",
+    "@atproto/api@0.15.14": {
+      "integrity": "sha512-FHEMAdscG+r2OFcZUIzPyTDpwzRAyinRsIIaTcuqe0MgZWF4CEGNAKPos0IbecBzMxTOzUHE18dQDKhoXMdgvg==",
       "dependencies": [
         "@atproto/common-web",
         "@atproto/lexicon",
@@ -297,8 +297,8 @@
         "zod"
       ]
     },
-    "@atproto/oauth-client@0.3.20": {
-      "integrity": "sha512-aclxN2vD5ldc9YiQtX6z4S5g5lU12sz297gzuTxBFUYiS3bh7dxU8j/cbD/BDvXIiVRzzzc5kOgE1CgT9XZ2mg==",
+    "@atproto/oauth-client@0.3.21": {
+      "integrity": "sha512-a+YM3aaOAY8/otlAnYmXC0XO+KLOo2cZGHwVvudTSnzwpps8sxhuELdPFl3JN16fS45TUnkYUIaqBgb9MLpx8w==",
       "dependencies": [
         "@atproto-labs/did-resolver",
         "@atproto-labs/fetch",
@@ -1203,8 +1203,8 @@
     "ms@2.1.3": {
       "integrity": "sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA=="
     },
-    "multiformats@13.3.6": {
-      "integrity": "sha512-yakbt9cPYj8d3vi/8o/XWm61MrOILo7fsTL0qxNx6zS0Nso6K5JqqS2WV7vK/KSuDBvrW3KfCwAdAgarAgOmww=="
+    "multiformats@13.3.7": {
+      "integrity": "sha512-meL9DERHj+fFVWoOX9fXqfcYcSpUfSYJPcFvDPKrxitICbwAoWR+Ut4j5NO9zAT917HUHLQmqzQbAsGNHlDcxQ=="
     },
     "multiformats@9.9.0": {
       "integrity": "sha512-HoMUjhH9T8DDBNT+6xzkrd9ga/XiBI4xLr58LJACwK6G3HTOPeMz4nB4KJs33L2BelrIJa7P0VuNaVF3hMYfjg=="
@@ -1444,8 +1444,8 @@
         "has-flag"
       ]
     },
-    "tailwind-merge@3.3.0": {
-      "integrity": "sha512-fyW/pEfcQSiigd5SNn0nApUOxx0zB/dm6UDU/rEwc2c3sX2smWUNbapHv+QRqLGVp9GWX3THIa7MUGPo+YkDzQ=="
+    "tailwind-merge@3.3.1": {
+      "integrity": "sha512-gBXpgUm/3rp1lMZZrM/w7D8GKqshif0zAymAhbCyIt8KMe+0v9DQ7cdYLR4FHH/cKpdTXb+A/tKKU3eolfsI+g=="
     },
     "tailwindcss@4.1.9": {
       "integrity": "sha512-anBZRcvfNMsQdHB9XSGzAtIQWlhs49uK75jfkwrqjRUbjt4d7q9RE1wR1xWyfYZhLFnFX4ahWp88Au2lcEw5IQ=="
@@ -1552,7 +1552,7 @@
   },
   "workspace": {
     "dependencies": [
-      "jsr:@bigmoves/bff@0.3.0-beta.33",
+      "jsr:@bigmoves/bff@0.3.0-beta.34",
       "jsr:@std/path@^1.1.0",
       "npm:@tailwindcss/cli@^4.1.9",
       "npm:preact@^10.26.5",

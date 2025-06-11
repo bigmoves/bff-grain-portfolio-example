@@ -1,7 +1,7 @@
 {
   "imports": {
     "$lexicon/": "./__generated__/",
-    "@bigmoves/bff": "jsr:@bigmoves/bff@0.3.0-beta.33",
+    "@bigmoves/bff": "jsr:@bigmoves/bff@0.3.0-beta.34",
     "@std/path": "jsr:@std/path@^1.1.0",
     "@tailwindcss/cli": "npm:@tailwindcss/cli@^4.1.9",
     "preact": "npm:preact@^10.26.5",
