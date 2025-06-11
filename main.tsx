@@ -18,7 +18,6 @@ import {
   backfillCollections,
   bff,
   BffContext,
-  JETSTREAM,
   RootProps,
   route,
   WithBffMeta,
@@ -41,15 +40,15 @@ bff({
     "social.grain.gallery.item",
     "social.grain.photo",
   ],
-  jetstreamUrl: JETSTREAM.WEST_1,
+  // Deno Deploy shuts down the server after a few seconds of inactivity,
+  // so there's no point in listening to the jetstream in this case.
+  // A re-sync will happen when the app boots back up. If you deploy to
+  // a different cloud provider like fly.io or Digital Ocean, you can keep the
+  // server running and uncomment this line.
+  // jetstreamUrl: JETSTREAM.WEST_1,
   lexicons,
   onListen: async ({ indexService, cfg }) => {
     staticFilesHash = await generateStaticFilesHash();
-    const actor = indexService.getActor(REPO);
-    if (actor) {
-      // If the actor exists, we assume the database is already initialized
-      return;
-    }
     await backfillCollections(
       indexService,
       cfg,
