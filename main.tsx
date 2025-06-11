@@ -33,7 +33,7 @@ bff({
   appName: "Grain Social Portfolio",
   databaseUrl: "sqlite.db",
   // Collections marked as external are only indexed for known actors in the
-  // system, in this case the did of the repo you specify below.
+  // system, in this case the did of the repo you specify above.
   externalCollections: [
     "social.grain.actor.profile",
     "social.grain.gallery",
