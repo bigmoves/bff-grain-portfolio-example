@@ -2,8 +2,9 @@
 
 This is web application that displays your photo galleries from
 [Grain Social](https://grain.social) using the AT Protocol. This project uses
-the BFF (Backend For Frontend) framework to create a lightweight, responsive
-portfolio website for showcasing your Grain photos.
+the [BFF (Backend For Frontend)](https://github.com/bigmoves/bff) framework to
+create a lightweight, responsive portfolio website for showcasing your Grain
+photos.
 
 ## Features
 
@@ -89,7 +90,8 @@ const REPO = "your-did-here";
 ## Technologies
 
 - [Deno](https://deno.com/) - JavaScript/TypeScript runtime
-- [BFF](https://github.com/bigmoves/bff) - Backend For Frontend framework
+- [BFF](https://github.com/bigmoves/bff) - Backend For Frontend framework for
+  the AT Protocol
 - [Preact](https://preactjs.com/) - Fast 3kB alternative to React
 - [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
 - [HTMX](https://htmx.org/) - High power tools for HTML
