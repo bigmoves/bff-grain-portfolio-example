@@ -1,0 +1,22 @@
+{
+  "imports": {
+    "$lexicon/": "./__generated__/",
+    "@bigmoves/bff": "jsr:@bigmoves/bff@0.3.0-beta.33",
+    "@std/path": "jsr:@std/path@^1.1.0",
+    "@tailwindcss/cli": "npm:@tailwindcss/cli@^4.1.9",
+    "preact": "npm:preact@^10.26.5",
+    "tailwindcss": "npm:tailwindcss@^4.1.9",
+    "typed-htmx": "npm:typed-htmx@^0.3.1"
+  },
+  "tasks": {
+    "dev": "deno run \"dev:*\"",
+    "dev:server": "deno run -A --watch ./main.tsx",
+    "dev:tailwind": "deno run -A --node-modules-dir npm:@tailwindcss/cli -i ./input.css -o ./static/styles.css --watch",
+    "codegen": "deno run -A jsr:@bigmoves/bff-cli@0.3.0-beta.33 lexgen"
+  },
+  "compilerOptions": {
+    "jsx": "precompile",
+    "jsxImportSource": "preact"
+  },
+  "nodeModulesDir": "auto"
+}

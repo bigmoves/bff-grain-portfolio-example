@@ -1,0 +1,12 @@
+{
+  "lexicons": [
+    "social.grain.gallery",
+    "social.grain.gallery.item",
+    "social.grain.gallery.defs",
+    "social.grain.photo",
+    "social.grain.photo.defs",
+    "social.grain.defs",
+    "social.grain.actor.profile",
+    "social.grain.actor.defs"
+  ]
+}
