@@ -40,6 +40,31 @@ Generate lexicon types:
 deno task codegen
 ```
 
+### Adding New Lexicons
+
+To add new lexicons to your project, you can use the
+[lpm CLI](https://github.com/lexicon-community/lpm):
+
+1. Install lpm:
+
+```bash
+deno install --global --allow-all jsr:@lpm/cli --name lpm
+```
+
+2. Add a new lexicon (replace with the desired lexicon ID):
+
+```bash
+lpm add com.example.mylexicon
+```
+
+3. The lexicon will be added to your `lexicons` directory.
+
+4. After adding new lexicons, regenerate your TypeScript types:
+
+```bash
+deno task codegen
+```
+
 ## Project Structure
 
 ```
