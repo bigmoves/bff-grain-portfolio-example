@@ -1,15 +1,9 @@
-import {
-  bff,
-  route,
-  JETSTREAM,
-  backfillCollections,
-  BffContext,
-  WithBffMeta,
-  RootProps,
-} from "@bigmoves/bff";
-import { AtUri } from "npm:@atproto/syntax@0.4";
 import { Label } from "$lexicon/types/com/atproto/label/defs.ts";
-import { $Typed, Un$Typed } from "$lexicon/util.ts";
+import { ProfileView } from "$lexicon/types/social/grain/actor/defs.ts";
+import { Record as Profile } from "$lexicon/types/social/grain/actor/profile.ts";
+import { Record as Gallery } from "$lexicon/types/social/grain/gallery.ts";
+import { GalleryView } from "$lexicon/types/social/grain/gallery/defs.ts";
+import { Record as GalleryItem } from "$lexicon/types/social/grain/gallery/item.ts";
 import {
   isRecord as isPhoto,
   Record as Photo,
@@ -18,18 +12,26 @@ import {
   isPhotoView,
   PhotoView,
 } from "$lexicon/types/social/grain/photo/defs.ts";
-import { Record as GalleryItem } from "$lexicon/types/social/grain/gallery/item.ts";
-import { Record as Gallery } from "$lexicon/types/social/grain/gallery.ts";
-import { Record as Profile } from "$lexicon/types/social/grain/actor/profile.ts";
-import { ProfileView } from "$lexicon/types/social/grain/actor/defs.ts";
-import { GalleryView } from "$lexicon/types/social/grain/gallery/defs.ts";
+import { $Typed, Un$Typed } from "$lexicon/util.ts";
+import {
+  backfillCollections,
+  bff,
+  BffContext,
+  JETSTREAM,
+  RootProps,
+  route,
+  WithBffMeta,
+} from "@bigmoves/bff";
 import { join } from "@std/path/join";
+import { AtUri } from "npm:@atproto/syntax@0.4";
 
 let staticFilesHash = new Map<string, string>();
 
 bff({
   appName: "Grain Social Portfolio",
-  collections: [
+  // Collections marked as external are only indexed for known actors in the
+  // system, in this case the did of the repo you specify below.
+  externalCollections: [
     "social.grain.actor.profile",
     "social.grain.gallery",
     "social.grain.gallery.item",
@@ -40,10 +42,10 @@ bff({
     staticFilesHash = await generateStaticFilesHash();
     await backfillCollections(
       indexService,
-      cfg
+      cfg,
     )({
       repos: ["did:plc:bcgltzqazw5tb6k2g3ttenbj"],
-      collections: cfg.collections,
+      externalCollections: cfg.externalCollections,
     });
   },
   rootElement: Root,
@@ -51,17 +53,15 @@ bff({
     route("/", (_req, _params, ctx) => {
       const galleries = getActorGalleries(
         "did:plc:bcgltzqazw5tb6k2g3ttenbj",
-        ctx
+        ctx,
       );
       return ctx.render(
         <div class="flex flex-col gap-8 my-8 px-4">
           <h1 class="text-4xl font-bold text-zinc-800 dark:text-zinc-100">
             Chad's Photos
           </h1>
-          {galleries.map((g) => (
-            <PhotoGrid key={g.cid} gallery={g} />
-          ))}
-        </div>
+          {galleries.map((g) => <PhotoGrid key={g.cid} gallery={g} />)}
+        </div>,
       );
     }),
   ],
@@ -129,11 +129,11 @@ function PhotoGrid({ gallery }: Readonly<{ gallery: GalleryView }>) {
 
 function getGalleryItemsAndPhotos(
   ctx: BffContext,
-  galleries: WithBffMeta<Gallery>[]
+  galleries: WithBffMeta<Gallery>[],
 ): Map<string, WithBffMeta<Photo>[]> {
   const galleryUris = galleries.map(
     (gallery) =>
-      `at://${gallery.did}/social.grain.gallery/${new AtUri(gallery.uri).rkey}`
+      `at://${gallery.did}/social.grain.gallery/${new AtUri(gallery.uri).rkey}`,
   );
 
   if (galleryUris.length === 0) return new Map();
@@ -152,7 +152,7 @@ function getGalleryItemsAndPhotos(
     "social.grain.photo",
     {
       where: [{ field: "uri", in: photoUris }],
-    }
+    },
   );
 
   const photosMap = new Map<string, WithBffMeta<Photo>>();
@@ -210,7 +210,7 @@ function getActorGalleries(handleOrDid: string, ctx: BffContext) {
       gallery,
       creator,
       galleryPhotosMap.get(gallery.uri) ?? [],
-      labelMap.get(gallery.uri) ?? []
+      labelMap.get(gallery.uri) ?? [],
     )
   );
 }
@@ -219,7 +219,7 @@ export function galleryToView(
   record: WithBffMeta<Gallery>,
   creator: Un$Typed<ProfileView>,
   items: Photo[],
-  labels: Label[] = []
+  labels: Label[] = [],
 ): Un$Typed<GalleryView> {
   return {
     uri: record.uri,
@@ -239,8 +239,8 @@ function itemToView(
   item:
     | WithBffMeta<Photo>
     | {
-        $type: string;
-      }
+      $type: string;
+    },
 ): Un$Typed<PhotoView> | undefined {
   if (isPhoto(item)) {
     return photoToView(did, item);
@@ -252,14 +252,14 @@ export function getActorProfile(did: string, ctx: BffContext) {
   const actor = ctx.indexService.getActor(did);
   if (!actor) return null;
   const profileRecord = ctx.indexService.getRecord<WithBffMeta<Profile>>(
-    `at://${did}/social.grain.actor.profile/self`
+    `at://${did}/social.grain.actor.profile/self`,
   );
   return profileRecord ? profileToView(profileRecord, actor.handle) : null;
 }
 
 export function profileToView(
   record: WithBffMeta<Profile>,
-  handle: string
+  handle: string,
 ): Un$Typed<ProfileView> {
   return {
     did: record.did,
@@ -272,7 +272,7 @@ export function profileToView(
 
 export function photoToView(
   did: string,
-  photo: WithBffMeta<Photo>
+  photo: WithBffMeta<Photo>,
 ): $Typed<PhotoView> {
   return {
     $type: "social.grain.photo.defs#photoView",
@@ -288,7 +288,7 @@ export function photoToView(
 export function photoUrl(
   did: string,
   cid: string,
-  type: "thumbnail" | "fullsize" = "fullsize"
+  type: "thumbnail" | "fullsize" = "fullsize",
 ): string {
   return `https://cdn.bsky.app/img/feed_${type}/plain/${did}/${cid}@jpeg`;
 }
@@ -302,7 +302,7 @@ async function generateStaticFilesHash(): Promise<Map<string, string>> {
       (entry.name.endsWith(".js") || entry.name.endsWith(".css"))
     ) {
       const fileContent = await Deno.readFile(
-        join(Deno.cwd(), "static", entry.name)
+        join(Deno.cwd(), "static", entry.name),
       );
       const hashBuffer = await crypto.subtle.digest("SHA-256", fileContent);
       const hash = Array.from(new Uint8Array(hashBuffer))
